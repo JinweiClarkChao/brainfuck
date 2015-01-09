@@ -9,7 +9,6 @@ typedef struct brainfuck{
 	char command[MAX_DATA];
 	char *ptr;
 	int count;
-	int pos;
 }bf;
 
 bf one;
@@ -18,11 +17,10 @@ void init()
 {
 	char c;
 	memset(&one, 0, sizeof(one));
-	one.pos = 0;
 	one.count = 0;
 	one.ptr = one.data;
-
-	while (c = getchar())
+	
+	while ((c = getchar()) != EOF)
 	{
 		if (c == '\n')
 			break;
@@ -31,6 +29,7 @@ void init()
 			one.command[++one.count] = c;
 		}
 	}
+	one.command[0] = one.count;
 	one.command[one.count] = '\0';
 }
 
@@ -39,7 +38,8 @@ void run()
 	char c;
 	int i;
 
-	while (c = one.command[++one.pos])
+	one.count = 0;
+	while (c = one.command[++one.count])
 	{
 		switch (c)
 		{
@@ -66,11 +66,11 @@ void run()
 				break;
 			else
 			{
-				for (i = one.pos + 1; i <= one.count; i++)
+				for (i = one.count + 1; i <= one.command[0]; i++)
 				{
 					if (one.command[i] == ']')
 					{
-						one.pos = i;
+						one.count = i;
 						break;
 					}
 				}
@@ -81,11 +81,11 @@ void run()
 				break;
 			else
 			{
-				for (i = one.pos - 1; i >= 1; i--)
+				for (i = one.count - 1; i >= 1; i--)
 				{
 					if (one.command[i] == '[')
 					{
-						one.pos = i;
+						one.count = i;
 						break;
 					}
 				}
