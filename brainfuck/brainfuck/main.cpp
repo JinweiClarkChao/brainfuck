@@ -40,9 +40,10 @@ void init()
 			break;
 		else
 		{
-			one.command[one.count++] = c;
+			one.command[++one.count] = c;
 		}
 	}
+	one.command[one.count] = '\0';
 }
 
 void run()
@@ -50,7 +51,7 @@ void run()
 	char c;
 	int i;
 
-	while (c = one.command[one.pos++])
+	while (c = one.command[++one.pos])
 	{
 		switch (c)
 		{
@@ -67,17 +68,17 @@ void run()
 			one.ptr--;
 			break;
 		case ',':
-			
+			*one.ptr = getchar();
 			break;
 		case '.':
 			putchar(*one.ptr);
 			break;
 		case '[':
-			if (*one.ptr)
+			if (*one.ptr != 0)
 				break;
 			else
 			{
-				for (i = one.pos; i < one.count; i++)
+				for (i = one.pos + 1; i <= one.count; i++)
 				{
 					if (one.command[i] == ']')
 					{
@@ -88,11 +89,11 @@ void run()
 			}
 			break;
 		case ']':
-			if (*one.ptr)
+			if (*one.ptr == 0)
 				break;
 			else
 			{
-				for (i = one.pos; i >= 0; i--)
+				for (i = one.pos - 1; i >= 1; i--)
 				{
 					if (one.command[i] == '[')
 					{
