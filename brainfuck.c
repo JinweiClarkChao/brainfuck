@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #define MAX_DATA 30000
@@ -19,15 +18,12 @@ void init()
 	memset(&one, 0, sizeof(one));
 	one.count = 0;
 	one.ptr = one.data;
-	
+
 	while ((c = getchar()) != EOF)
 	{
 		if (c == '\n')
 			break;
-		else
-		{
-			one.command[++one.count] = c;
-		}
+		one.command[++one.count] = c;
 	}
 	one.command[0] = one.count;
 	one.command[one.count] = '\0';
@@ -97,9 +93,7 @@ void run()
 
 int main(int argc, char **argv)
 {
-	if (argc > 1) {
-		freopen(argv[1], "r", stdin);
-	}
+	printf("Input the brainfuck expression below\n");
 	init();
 	run();
 	return 0;
