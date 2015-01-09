@@ -1,6 +1,13 @@
 brainfuck
 =========
 
+##Usage:
+```bash
+gcc brainfuck.c -o brainfuck
+./brainfuck HelloWorld.bf
+```
+
+##What's brainfuck
 Brainfuck is represented by an array with 30,000 cells initialized to zero
 and a data pointer pointing at the current cell.
 
