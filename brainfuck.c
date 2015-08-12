@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+ 
 #define MAX_DATA 30000
 
 typedef struct brainfuck{
